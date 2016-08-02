@@ -6,6 +6,8 @@ feature 'User can see all the items' do
 
     expect(page.status_code).to eq(200)
 
-    expect(page).to have_css('h1', 'Items')
+    within('h1') do
+      expect(page).to have_content('Items')
+    end
   end
 end

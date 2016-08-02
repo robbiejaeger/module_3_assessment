@@ -10,8 +10,21 @@ feature 'User can search by zip code' do
 
       expect(page.status_code).to eq(200)
 
-      expect(page).to have_css('h1', 'Search Results')
-      expect(page).to have_css('h3', '17 Total Stores')
+      within('h1') do
+        expect(page).to have_content('Search Results')
+      end
+
+      within('h3') do
+        expect(page).to have_content('17 Total Stores')
+      end
+
+      within('table th:nth-child(1)') do
+        expect(page).to have_content('Name')
+      end
+
+      within('table tr:nth-child(2) td:nth-child(1)') do
+        expect(page).to have_content('Best Buy Mobile - Cherry Creek Shopping Center')
+      end
     end
   end
 end
