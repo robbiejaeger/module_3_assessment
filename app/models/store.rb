@@ -17,7 +17,7 @@ class Store < OpenStruct
   def self.find(store_id)
     raw_response = service.find(store_id)
 
-    store = raw_response["stores"].map do |raw_store|
+    raw_response["stores"].map do |raw_store|
       Store.new(raw_store)
     end[0]
   end
