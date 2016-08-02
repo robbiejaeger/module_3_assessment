@@ -19,6 +19,6 @@ class Store < OpenStruct
 
     store = raw_response["stores"].map do |raw_store|
       Store.new(raw_store)
-    end
+    end[0]
   end
 end

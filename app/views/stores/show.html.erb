@@ -1,11 +1,13 @@
 <h1 class="text-center"><%= @store.name %></h1>
 
-<h4>Store Type: <%= @store.storeType %></h4>
-<h5>Address: <%= @store.address %>, <%= @store.city %>, <%= @store.region @store.postalCode %></h5>
+<div class="container-fluid">
+  <h4>Store Type: <%= @store.storeType %></h4>
+  <h4>Address: <%= @store.address %>, <%= @store.city %>, <%= @store.region %> <%= @store.postalCode %></h5>
 
-<h5>Store Hours:</h5>
-<ul>
-  <% @store.hoursAmPm.each do |hour| %>
-    <li></li>
-  <% end %>
-</ul>
+  <h4>Store Hours:</h5>
+  <ul>
+    <% @store.hoursAmPm.split("; ").each do |hour| %>
+      <li><%= hour %></li>
+    <% end %>
+  </ul>
+</div>
