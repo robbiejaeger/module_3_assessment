@@ -5,7 +5,12 @@ class Store < OpenStruct
   end
 
   def self.find_by_zip(zip)
-    parsed_stores = service.find_by_zip(zip)
-    byebug
+    raw_response = service.find_by_zip(zip)
+
+    store_objects = raw_response["stores"].map do |raw_store|
+      Store.new(raw_store)
+    end
+
+    return store_objects, raw_response["total"]
   end
 end

@@ -12,13 +12,12 @@ class StoresService
       req.params['pageSize'] = '15'
       req.params['apiKey'] = ENV['BEST_BUY_API']
     end
-
     parse_response(response)
   end
 
   private
 
   def parse_response(response)
-    JSON.parse(response)
+    JSON.parse(response.body)
   end
 end
