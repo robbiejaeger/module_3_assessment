@@ -5,14 +5,56 @@ describe "Items API controller" do
     item1 = Item.create(name: "Item1")
     item2 = Item.create(name: "Item2")
 
-    get '/api/v1/messages'
+    get '/api/v1/items'
 
-    json = JSON.parse(response.body)
+    parsed_response = JSON.parse(response.body)
+    expect(response.status).to eq(200)
 
-    # test for the 200 status-code
-    expect(response).to be_success
+    expect(parsed_response.length).to eq(2)
+    expect(parsed_response[0]["name"]).to eq("Item1")
+  end
 
-    # check to make sure the right amount of messages are returned
-    expect(json['messages'].length).to eq(10)
+  it "finds an item by id" do
+    item1 = Item.create(name: "Item1")
+    item2 = Item.create(name: "Item2")
+
+    get '/api/v1/items/2'
+
+    parsed_response = JSON.parse(response.body)
+    expect(response.status).to eq(200)
+
+    expect(parsed_response.length).to eq(3)
+    expect(parsed_response["name"]).to eq("Item2")
+  end
+
+  it "can delete an item" do
+    item1 = Item.create(name: "Item1")
+    item2 = Item.create(name: "Item2")
+
+    delete '/api/v1/items/2'
+
+    expect(response.status).to eq(204)
+
+    get '/api/v1/items'
+
+    parsed_response = JSON.parse(response.body)
+
+    expect(parsed_response.length).to eq(1)
+    expect(parsed_response[0]["name"]).to eq("Item1")
+  end
+
+  it "can create an item" do
+    item1 = Item.create(name: "Item1")
+
+    post '/api/v1/items', {item: {name: "Item2"}}
+
+    expect(response.status).to eq(201)
+
+    get '/api/v1/items'
+
+    parsed_response = JSON.parse(response.body)
+
+    expect(parsed_response.length).to eq(2)
+    expect(parsed_response[1]["name"]).to eq("Item2")
   end
 end
