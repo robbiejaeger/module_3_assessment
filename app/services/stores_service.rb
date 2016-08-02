@@ -5,7 +5,15 @@ class StoresService
   end
 
   def find_by_zip(zip)
-    response
+    response = @conn.get do |req|
+      req.url "/v1/stores(area(#{zip},25))"
+      req.params['format'] = 'json'
+      req.params['show'] = 'longName,city,distance,phone,storeType'
+      req.params['pageSize'] = '15'
+      req.params['apiKey'] = ENV['BEST_BUY_API']
+    end
+
+    parse_response(response)
   end
 
   private
