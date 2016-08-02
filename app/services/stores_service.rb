@@ -8,7 +8,7 @@ class StoresService
     response = @conn.get do |req|
       req.url "/v1/stores(area(#{zip},25))"
       req.params['format'] = 'json'
-      req.params['show'] = 'longName,city,distance,phone,storeType'
+      req.params['show'] = 'storeId,longName,city,distance,phone,storeType'
       req.params['pageSize'] = '15'
       req.params['apiKey'] = ENV['BEST_BUY_API']
     end

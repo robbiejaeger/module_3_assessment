@@ -1,23 +1,25 @@
 <h1 class="text-center">Search Results</h1>
 
-<h3><%= @stores.count %> Total Stores</h3>
+<h3 class="text-center"><%= @total %> Total Stores</h3>
 
-<table class="table">
-  <tr>
-    <th>Long Name</th>
-    <th>City</th>
-    <th>Distance</th>
-    <th>Phone Number</th>
-    <th>Store Type</th>
-  </tr>
-
-  <% @stores.each do |store| %>
+<div class="container-fluid">
+  <table class="table table-striped">
     <tr>
-      <td><%= store.longName %></td>
-      <td><%= store.city %></td>
-      <td><%= store.distance %></td>
-      <td><%= store.phone %></td>
-      <td><%= store.storeType %></td>
+      <th>Long Name</th>
+      <th>City</th>
+      <th>Distance</th>
+      <th>Phone Number</th>
+      <th>Store Type</th>
     </tr>
-  <% end %>
-</table>
+
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= link_to store.longName, store_path(store.storeId) %></td>
+        <td><%= store.city %></td>
+        <td><%= store.distance %></td>
+        <td><%= store.phone %></td>
+        <td><%= store.storeType %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
