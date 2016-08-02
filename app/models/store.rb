@@ -21,4 +21,8 @@ class Store < OpenStruct
       Store.new(raw_store)
     end[0]
   end
+
+  def hours
+    hoursAmPm.split("; ")
+  end
 end

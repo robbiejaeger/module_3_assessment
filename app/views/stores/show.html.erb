@@ -6,7 +6,7 @@
 
   <h5>Store Hours:</h5>
   <ul>
-    <% @store.hoursAmPm.split("; ").each do |hour| %>
+    <% @store.hours.each do |hour| %>
       <li><%= hour %></li>
     <% end %>
   </ul>
