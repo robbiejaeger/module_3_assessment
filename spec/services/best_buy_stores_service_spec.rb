@@ -13,5 +13,20 @@ describe StoresService do
         expect(store["longName"]).to eq("Best Buy Mobile - Cherry Creek Shopping Center")
       end
     end
+
+    it "returns store for given storeId" do
+      VCR.use_cassette("store") do
+        store_info = StoresService.new.find("1118")
+        store = store_info["stores"].first
+
+        expect(store["name"]).to eq("Hato Rey")
+        expect(store["storeType"]).to eq("BigBox")
+        expect(store["address"]).to eq("230 Calle Federico Costa Hato Rey")
+        expect(store["city"]).to eq("San Juan")
+        expect(store["region"]).to eq("PR")
+        expect(store["postalCode"]).to eq("00918")
+        expect(store["hoursAmPm"]).to eq("Mon: 10am-9pm; Tue: 10am-9pm; Wed: 10am-9pm; Thurs: 10am-9pm; Fri: 10am-9pm; Sat: 10am-9pm; Sun: 11am-7pm")
+      end
+    end
   end
 end
