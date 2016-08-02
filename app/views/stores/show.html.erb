@@ -1,0 +1,11 @@
+<h1 class="text-center"><%= @store.name %></h1>
+
+<h4>Store Type: <%= @store.storeType %></h4>
+<h5>Address: <%= @store.address %>, <%= @store.city %>, <%= @store.region @store.postalCode %></h5>
+
+<h5>Store Hours:</h5>
+<ul>
+  <% @store.hoursAmPm.each do |hour| %>
+    <li></li>
+  <% end %>
+</ul>

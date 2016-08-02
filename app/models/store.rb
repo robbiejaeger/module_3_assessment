@@ -7,10 +7,18 @@ class Store < OpenStruct
   def self.find_by_zip(zip)
     raw_response = service.find_by_zip(zip)
 
-    store_objects = raw_response["stores"].map do |raw_store|
+    stores = raw_response["stores"].map do |raw_store|
       Store.new(raw_store)
     end
 
-    return store_objects, raw_response["total"]
+    return stores, raw_response["total"]
+  end
+
+  def self.find(store_id)
+    raw_response = service.find(store_id)
+
+    store = raw_response["stores"].map do |raw_store|
+      Store.new(raw_store)
+    end
   end
 end
